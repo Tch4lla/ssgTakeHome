@@ -65,4 +65,4 @@ Feel free to get creative with this. We want to see how you approach code organi
 
 - Completion of the tasks
 - Code quality and cleanliness
-- Attention to detail, and adherence to the required submision format instructions
+- Attention to detail, and adherence to the required submission format instructions
