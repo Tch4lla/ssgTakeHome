@@ -1,25 +1,7 @@
 import styled from '@emotion/styled';
 
 import { components } from '../components';
-
-type BlockType = 'PARAGRAPH' | 'HEADER' | 'BLOCKQUOTE' | 'IMAGE' | 'CAROUSEL';
-
-type Block = {
-  id: string;
-  type: BlockType;
-  reactNodeContent: React.ReactNode;
-  stringContent: string;
-  stringArrayContent: string[];
-};
-
-export type Props = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  hero_image: string;
-  blocks: Block[];
-};
+import { Props } from 'utils/types';
 
 const Wrapper = styled.article`
   max-width: 600px;

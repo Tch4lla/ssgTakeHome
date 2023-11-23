@@ -3,8 +3,7 @@ import { renderToString } from 'react-dom/server';
 
 import { EmotionCacheProvider, cache, emotionServer } from './emotion';
 import * as favicons from './favicons';
-
-import { Props as ReactBlogProps } from 'pages/BlogPost';
+import { Props as ReactBlogProps } from './types';
 export function buildHtml(content: React.ReactNode) {
   const { props } = content as React.ReactElement<ReactBlogProps>;
   const chunks = emotionServer.extractCriticalToChunks(
