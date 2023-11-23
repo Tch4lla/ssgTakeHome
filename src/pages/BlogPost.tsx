@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { components } from "../components";
+import { components } from '../components';
 
-type BlockType = "PARAGRAPH" | "HEADER" | "BLOCKQUOTE" | "IMAGE";
+type BlockType = 'PARAGRAPH' | 'HEADER' | 'BLOCKQUOTE' | 'IMAGE';
 
 type Block = {
   id: string;
@@ -15,7 +15,7 @@ export type Props = {
   slug: string;
   title: string;
   description: string;
-  heroImage: string;
+  hero_image: string;
   blocks: Block[];
 };
 
@@ -82,7 +82,7 @@ const Wrapper = styled.article`
     width: 90vw;
     background: white;
 
-    &[data-state="visible"] {
+    &[data-state='visible'] {
       display: flex;
     }
 
@@ -104,14 +104,19 @@ export function BlogPost(props: Props) {
       <section>
         <h1>{props.title}</h1>
         <p>{props.description}</p>
-        <img src={props.heroImage} />
+        <img src={props.hero_image} />
       </section>
 
       <div>
         {props.blocks.map((block) => {
           const Component = components[block.type];
 
-          return <Component key={block.id} content={block.content} />;
+          return (
+            <Component
+              key={block.id}
+              content={block.content}
+            />
+          );
         })}
       </div>
 
@@ -119,11 +124,17 @@ export function BlogPost(props: Props) {
         <form>
           <fieldset>
             <label htmlFor="name">name</label>
-            <input type="name" id="name" />
+            <input
+              type="name"
+              id="name"
+            />
           </fieldset>
           <fieldset>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" />
+            <input
+              type="email"
+              id="email"
+            />
           </fieldset>
           <fieldset>
             <label htmlFor="message">Message</label>
