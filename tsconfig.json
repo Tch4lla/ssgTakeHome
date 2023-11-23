@@ -1,8 +1,10 @@
 {
   "extends": "@tablecheck/scripts/tsconfig/base.json",
   "exclude": ["node_modules"],
+  "files": [
+    "/home/tch4lla/sssillahTableCheckTakeHome/marketing-ssg-takehome/.@tablecheck/definitions.d.ts"
+  ],
   "include": [
-    "cms/**/*.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/*.ts",
@@ -15,7 +17,6 @@
     "module": "esnext",
     "target": "es5",
     "baseUrl": "src",
-    "noEmit": true,
-    "paths": { "#cypress/*": ["../cypress/*"] }
+    "noEmit": true
   }
 }

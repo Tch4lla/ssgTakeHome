@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:cms": "npx tsx watch cms/index.ts",
-    "start:website": "serverless offline start --noPrependStageInUrl -s dev"
+    "start:website": "export NODE_OPTIONS=--openssl-legacy-provider && serverless offline start --noPrependStageInUrl -s dev"
   },
   "keywords": [],
   "author": "",
