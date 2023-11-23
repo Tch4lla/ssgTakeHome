@@ -1,25 +1,30 @@
 import { faker } from "@faker-js/faker";
 
-type BlockType = "PARAGRAPH" | "HEADER" | "BLOCKQUOTE" | "IMAGE";
+type BlockType = "PARAGRAPH" | "HEADER" | "BLOCKQUOTE" | "IMAGE" | "CAROUSEL";
 
 class Block {
   id: string;
   type: BlockType;
-  content: string;
+  reactNodeContent: React.ReactNode;
+  stringContent: string;
+  stringArrayContent: string[];
 
   constructor(type: BlockType) {
     this.id = faker.string.uuid();
     this.type = type;
     if (type === "PARAGRAPH") {
-      this.content = faker.lorem.paragraphs();
+      this.reactNodeContent = faker.lorem.paragraphs();
     } else if (type === "HEADER") {
-      this.content = faker.lorem.sentence();
+      this.reactNodeContent = faker.lorem.sentence();
     } else if (type === "BLOCKQUOTE") {
-      this.content = faker.lorem.paragraph();
+      this.stringContent = faker.lorem.paragraph();
     } else if (type === "IMAGE") {
-      this.content = "https://cataas.com/cat";
+      this.stringContent = "https://cataas.com/cat";
+    } else if (type === "CAROUSEL") {
+      const carouselData = faker.helpers.multiple(faker.image.url, { count: 10 })
+      this.stringArrayContent = carouselData
     } else {
-      this.content = "";
+      throw new Error('type not found');
     }
   }
 }
@@ -40,6 +45,7 @@ export class BlogPost {
     this.hero_image = faker.image.urlLoremFlickr();
     this.blocks = [
       new Block("PARAGRAPH"),
+      new Block("CAROUSEL"),
       ...new Array(faker.number.int({ min: 5, max: 20 }))
         .fill(null)
         .map(

@@ -1,10 +1,12 @@
-import React from "react";
-import { renderToString } from "react-dom/server";
+import React from 'react';
+import { renderToString } from 'react-dom/server';
 
-import { EmotionCacheProvider, cache, emotionServer } from "./emotion";
-import * as favicons from "./favicons";
+import { EmotionCacheProvider, cache, emotionServer } from './emotion';
+import * as favicons from './favicons';
 
+import { Props as ReactBlogProps } from 'pages/BlogPost';
 export function buildHtml(content: React.ReactNode) {
+  const { props } = content as React.ReactElement<ReactBlogProps>;
   const chunks = emotionServer.extractCriticalToChunks(
     renderToString(
       <EmotionCacheProvider value={cache}>{content}</EmotionCacheProvider>
@@ -41,9 +43,12 @@ export function buildHtml(content: React.ReactNode) {
     href='${favicons.size16}'
   >
   ${emotionServer.constructStyleTagsFromChunks(chunks)}
+  
 </head>
     <body>
-      <div id='root'>${chunks.html}</div>
+    <div id='root'>${chunks.html}</div>
+      <script defer src="../../public/reactApp.js"></script>
+      <script>window.ReactProps = ${JSON.stringify(props)}</script>
     </body>
   </html>
 `;

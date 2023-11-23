@@ -2,12 +2,14 @@ import styled from '@emotion/styled';
 
 import { components } from '../components';
 
-type BlockType = 'PARAGRAPH' | 'HEADER' | 'BLOCKQUOTE' | 'IMAGE';
+type BlockType = 'PARAGRAPH' | 'HEADER' | 'BLOCKQUOTE' | 'IMAGE' | 'CAROUSEL';
 
 type Block = {
   id: string;
   type: BlockType;
-  content: string;
+  reactNodeContent: React.ReactNode;
+  stringContent: string;
+  stringArrayContent: string[];
 };
 
 export type Props = {
@@ -111,10 +113,28 @@ export function BlogPost(props: Props) {
         {props.blocks.map((block) => {
           const Component = components[block.type];
 
+          let content: any;
+
+          switch (block.type) {
+            case 'PARAGRAPH':
+            case 'HEADER':
+              content = block.reactNodeContent;
+              break;
+            case 'BLOCKQUOTE':
+            case 'IMAGE':
+              content = block.stringContent;
+              break;
+            case 'CAROUSEL':
+              content = block.stringArrayContent;
+              break;
+            default:
+              break;
+          }
+
           return (
             <Component
               key={block.id}
-              content={block.content}
+              content={content}
             />
           );
         })}
